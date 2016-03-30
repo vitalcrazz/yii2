@@ -539,6 +539,38 @@ class QueryBuilder extends \yii\base\Object
     {
         return 'DROP INDEX ' . $this->db->quoteTableName($name) . ' ON ' . $this->db->quoteTableName($table);
     }
+	
+    /**
+     * Builds a SQL statement for adding a new default value.
+     * @param string $table the name of the table.
+     * @param string $column the name of the column.
+     * @param mixed $value a new default value of the column.
+     * @return string the SQL statement for creating a new default value.
+     */
+	public function addDefaultValue($table, $column, $value)
+    {
+        return 'ALTER TABLE '
+            . $this->db->quoteTableName($table)
+            . ' ALTER COLUMN '
+            . $this->db->quoteColumnName($column)
+            . ' SET DEFAULT '
+            . $this->db->quoteValue($value);
+    }
+
+    /**
+     * Builds a SQL statement for dropping a default value.
+     * @param string $table the name of the table.
+     * @param string $column the name of the column.
+     * @return string the SQL statement for dropping a default value.
+     */
+    public function dropDefaultValue($table, $column)
+    {
+        return 'ALTER TABLE '
+            . $this->db->quoteTableName($table)
+            . ' ALTER COLUMN '
+            . $this->db->quoteColumnName($column)
+            . ' DROP DEFAULT';
+    }
 
     /**
      * Creates a SQL statement for resetting the sequence value of a table's primary key.

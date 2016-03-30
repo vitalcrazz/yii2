@@ -722,6 +722,33 @@ class Command extends Component
 
         return $this->setSql($sql);
     }
+    
+    /**
+     * Creates a SQL command for adding a default value to the table's column.
+     * @param string $table the name of the table. The name will be properly quoted by the method.
+     * @param string $column the name of the column. The name will be properly quoted by the method.
+     * @param mixed $value a new default value of the column.
+     * @return $this the command object itself
+     */
+    public function addDefaultValue($table, $column, $value)
+    {
+        $sql = $this->db->getQueryBuilder()->addDefaultValue($table, $column, $value);
+
+        return $this->setSql($sql);
+    }
+    
+    /**
+     * Creates a SQL command for dropping a default value.
+     * @param string $table the name of the table. The name will be properly quoted by the method.
+     * @param string $column the name of the column. The name will be properly quoted by the method.
+     * @return $this the command object itself
+     */
+    public function dropDefaultValue($table, $column)
+    {
+        $sql = $this->db->getQueryBuilder()->dropDefaultValue($table, $column);
+
+        return $this->setSql($sql);
+    }
 
     /**
      * Creates a SQL command for resetting the sequence value of a table's primary key.

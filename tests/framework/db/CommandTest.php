@@ -427,7 +427,60 @@ SQL;
         $this->assertNull($db->getSchema()->getTableSchema($fromTableName, true));
         $this->assertNotNull($db->getSchema()->getTableSchema($toTableName, true));
     }
+    
+    public function testAddDefaultValue()
+    {
+        if ($this->driverName === 'sqlite'){
+            $this->markTestSkipped('Sqlite does not support addDefaultValue');
+        }
+        
+        $db = $this->getConnection();
+        $db->createCommand('DELETE FROM {{customer}}')->execute();
 
+        $command = $db->createCommand();
+        $command->addDefaultValue('{{customer}}', 'name', 'Undefined person')->execute();
+        $command->insert(
+            '{{customer}}',
+            [
+                'email' => 't1@example.com',
+            ]
+        )->execute();
+        
+        $record = $db->createCommand('SELECT [[email]], [[name]] FROM {{customer}}')->queryOne();
+        $this->assertEquals([
+            'email' => 't1@example.com',
+            'name' => 'Undefined person',
+        ], $record);
+    }
+    
+    public function testDropDefaultValue()
+    {
+        $notSupported = ['cubrid', 'oci', 'sqlite'];
+        if (in_array($this->driverName, $notSupported)) {
+            $this->markTestSkipped($this->driverName . ' does not support dropDefaultValue');
+        }
+        
+        $db = $this->getConnection();
+        $db->createCommand('DELETE FROM {{type}}')->execute();
+
+        $command = $db->createCommand();
+        $command->dropDefaultValue('{{type}}', 'char_col2')->execute();
+        $command->insert(
+            '{{type}}',
+            [
+                'int_col' => 1,
+                'char_col' => 'x',
+                'float_col' => 2,
+                'bool_col' => false,
+            ]
+        )->execute();
+        
+        $record = $db->createCommand('SELECT [[char_col2]] FROM {{type}}')->queryOne();
+        $this->assertEquals([
+            'char_col2' => null,
+        ], $record);
+    }
+    
     /*
     public function testUpdate()
     {

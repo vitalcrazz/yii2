@@ -446,4 +446,31 @@ class Migration extends Component implements MigrationInterface
         $this->db->createCommand()->dropIndex($name, $table)->execute();
         echo ' done (time: ' . sprintf('%.3f', microtime(true) - $time) . "s)\n";
     }
+    
+    /**
+     * Builds and executes a SQL statement for adding a default value to the table's column.
+     * @param string $table the name of the table. The name will be properly quoted by the method.
+     * @param string $column the name of the column. The name will be properly quoted by the method.
+     * @param mixed $value a new default value of the column.
+     */
+    public function addDefaultValue($table, $column, $value)
+    {
+        echo "    > add default value for column $column in table $table ...";
+        $time = microtime(true);
+        $this->db->createCommand()->addDefaultValue($table, $column, $value)->execute();
+        echo ' done (time: ' . sprintf('%.3f', microtime(true) - $time) . "s)\n";
+    }
+    
+    /**
+     * Builds and executes a SQL statement for dropping a default value.
+     * @param string $table the name of the table. The name will be properly quoted by the method.
+     * @param string $column the name of the column. The name will be properly quoted by the method.
+     */
+    public function dropDefaultValue($table, $column)
+    {
+        echo "    > drop default value for column $column in table $table ...";
+        $time = microtime(true);
+        $this->db->createCommand()->dropDefaultValue($table, $column)->execute();
+        echo ' done (time: ' . sprintf('%.3f', microtime(true) - $time) . "s)\n";
+    }
 }
