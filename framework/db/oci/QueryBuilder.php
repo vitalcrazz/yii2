@@ -117,6 +117,17 @@ EOD;
     {
         return 'DROP INDEX ' . $this->db->quoteTableName($name);
     }
+    
+    /**
+     * Builds a SQL statement for dropping a default value.
+     * @param string $table the name of the table.
+     * @param string $column the name of the column.
+     * @return string the SQL statement for dropping a default value.
+     */
+    public function dropDefaultValue($table, $column)
+    {
+        throw new NotSupportedException(__METHOD__ . ' is not supported by Oracle.');
+    }
 
     /**
      * @inheritdoc

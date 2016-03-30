@@ -163,6 +163,49 @@ class QueryBuilder extends \yii\db\QueryBuilder
 
         return $sql;
     }
+    
+    /**
+     * Builds a SQL statement for adding a new default value.
+     * @param string $table the name of the table.
+     * @param string $column the name of the column.
+     * @param mixed $value a new default value of the column.
+     * @return string the SQL statement for creating a new default value.
+     */
+	public function addDefaultValue($table, $column, $value)
+    {
+        return 'ALTER TABLE '
+            . $this->db->quoteTableName($table)
+            . ' ADD DEFAULT '
+            . $this->db->quoteValue($value)
+            . ' FOR '
+            . $this->db->quoteColumnName($column);
+    }
+
+    /**
+     * Builds a SQL statement for dropping a default value.
+     * @param string $table the name of the table.
+     * @param string $column the name of the column.
+     * @return string the SQL statement for dropping a default value.
+     */
+    public function dropDefaultValue($table, $column)
+    {
+        if ($schema !== '') {
+            $table = "{$schema}.{$table}";
+        }
+        $table = $this->db->quoteTableName($table);
+        $column = $this->db->quoteColumnName($column);
+        
+        $sql = <<<SQL
+DECLARE @ObjectName NVARCHAR(100);
+SELECT @ObjectName = OBJECT_NAME([default_object_id])
+    FROM SYS.COLUMNS
+    WHERE [object_id] = OBJECT_ID({$table}) AND [name] = {$column};
+IF @ObjectName IS NOT NULL
+    EXEC('ALTER TABLE {$table} DROP CONSTRAINT ' + @ObjectName);
+SQL;
+
+        return $sql;
+    }
 
     /**
      * Builds a SQL statement for enabling or disabling integrity check.
