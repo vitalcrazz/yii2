@@ -191,16 +191,14 @@ class QueryTest extends DatabaseTestCase
         $query = new Query;
         $query->select(['id', 'name'])
             ->from('item')
-            ->limit(2)
             ->union(
                 (new Query())
                     ->select(['id', 'name'])
                     ->from(['category'])
-                    ->limit(2)
             );
         $result = $query->all($connection);
         $this->assertNotEmpty($result);
-        $this->assertSame(4, count($result));
+        $this->assertSame(7, count($result));
     }
 
     public function testOne()
