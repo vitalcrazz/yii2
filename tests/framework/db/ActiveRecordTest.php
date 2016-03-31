@@ -658,7 +658,7 @@ class ActiveRecordTest extends DatabaseTestCase
                 },
         ]);
         if ($aliasMethod === 'explicit') {
-            $orders = $query->orderBy('{{i}}.id')->all();
+            $orders = $query->orderBy('{{i}}.[[id]]')->all();
         } elseif ($aliasMethod === 'querysyntax') {
             $orders = $query->orderBy('{{@item}}.id')->all();
         } elseif ($aliasMethod === 'applyAlias') {
