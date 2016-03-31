@@ -183,13 +183,13 @@ abstract class QueryBuilderTest extends DatabaseTestCase
                 ],
             ],
             [
-                Schema::TYPE_CHAR . ' CHECK (value LIKE "test%")',
-                $this->char()->check('value LIKE "test%"'),
+                Schema::TYPE_CHAR . ' CHECK (value LIKE \'test%\')',
+                $this->char()->check('value LIKE \'test%\''),
                 [
-                    'mysql' => 'char(1) CHECK (value LIKE "test%")',
-                    'sqlite' => 'char(1) CHECK (value LIKE "test%")',
-                    'oci' => 'CHAR(1) CHECK (value LIKE "test%")',
-                    'cubrid' => 'char(1) CHECK (value LIKE "test%")',
+                    'mysql' => 'char(1) CHECK (value LIKE \'test%\')',
+                    'sqlite' => 'char(1) CHECK (value LIKE \'test%\')',
+                    'oci' => 'CHAR(1) CHECK (value LIKE \'test%\')',
+                    'cubrid' => 'char(1) CHECK (value LIKE \'test%\')',
                 ],
             ],
             [
@@ -204,13 +204,13 @@ abstract class QueryBuilderTest extends DatabaseTestCase
                 ],
             ],
             [
-                Schema::TYPE_CHAR . '(6) CHECK (value LIKE "test%")',
-                $this->char(6)->check('value LIKE "test%"'),
+                Schema::TYPE_CHAR . '(6) CHECK (value LIKE \'test%\')',
+                $this->char(6)->check('value LIKE \'test%\''),
                 [
-                    'mysql' => 'char(6) CHECK (value LIKE "test%")',
-                    'sqlite' => 'char(6) CHECK (value LIKE "test%")',
-                    'oci' => 'CHAR(6) CHECK (value LIKE "test%")',
-                    'cubrid' => 'char(6) CHECK (value LIKE "test%")',
+                    'mysql' => 'char(6) CHECK (value LIKE \'test%\')',
+                    'sqlite' => 'char(6) CHECK (value LIKE \'test%\')',
+                    'oci' => 'CHAR(6) CHECK (value LIKE \'test%\')',
+                    'cubrid' => 'char(6) CHECK (value LIKE \'test%\')',
                 ],
             ],
             [
@@ -668,13 +668,13 @@ abstract class QueryBuilderTest extends DatabaseTestCase
                 ],
             ],
             [
-                Schema::TYPE_STRING . ' CHECK (value LIKE "test%")',
-                $this->string()->check('value LIKE "test%"'),
+                Schema::TYPE_STRING . ' CHECK (value LIKE \'test%\')',
+                $this->string()->check('value LIKE \'test%\''),
                 [
-                    'mysql' => 'varchar(255) CHECK (value LIKE "test%")',
-                    'sqlite' => 'varchar(255) CHECK (value LIKE "test%")',
-                    'sqlsrv' => 'varchar(255) CHECK (value LIKE "test%")',
-                    'cubrid' => 'varchar(255) CHECK (value LIKE "test%")',
+                    'mysql' => 'varchar(255) CHECK (value LIKE \'test%\')',
+                    'sqlite' => 'varchar(255) CHECK (value LIKE \'test%\')',
+                    'sqlsrv' => 'varchar(255) CHECK (value LIKE \'test%\')',
+                    'cubrid' => 'varchar(255) CHECK (value LIKE \'test%\')',
                 ],
             ],
             [
@@ -698,13 +698,13 @@ abstract class QueryBuilderTest extends DatabaseTestCase
                 ],
             ],
             [
-                Schema::TYPE_STRING . '(32) CHECK (value LIKE "test%")',
-                $this->string(32)->check('value LIKE "test%"'),
+                Schema::TYPE_STRING . '(32) CHECK (value LIKE \'test%\')',
+                $this->string(32)->check('value LIKE \'test%\''),
                 [
-                    'mysql' => 'varchar(32) CHECK (value LIKE "test%")',
-                    'sqlite' => 'varchar(32) CHECK (value LIKE "test%")',
-                    'sqlsrv' => 'varchar(32) CHECK (value LIKE "test%")',
-                    'cubrid' => 'varchar(32) CHECK (value LIKE "test%")',
+                    'mysql' => 'varchar(32) CHECK (value LIKE \'test%\')',
+                    'sqlite' => 'varchar(32) CHECK (value LIKE \'test%\')',
+                    'sqlsrv' => 'varchar(32) CHECK (value LIKE \'test%\')',
+                    'cubrid' => 'varchar(32) CHECK (value LIKE \'test%\')',
                 ],
             ],
             [
@@ -740,13 +740,13 @@ abstract class QueryBuilderTest extends DatabaseTestCase
                 ],
             ],
             [
-                Schema::TYPE_TEXT . ' CHECK (value LIKE "test%")',
-                $this->text()->check('value LIKE "test%"'),
+                Schema::TYPE_TEXT . ' CHECK (value LIKE \'test%\')',
+                $this->text()->check('value LIKE \'test%\''),
                 [
-                    'mysql' => 'text CHECK (value LIKE "test%")',
-                    'sqlite' => 'text CHECK (value LIKE "test%")',
-                    'sqlsrv' => 'text CHECK (value LIKE "test%")',
-                    'cubrid' => 'varchar CHECK (value LIKE "test%")',
+                    'mysql' => 'text CHECK (value LIKE \'test%\')',
+                    'sqlite' => 'text CHECK (value LIKE \'test%\')',
+                    'sqlsrv' => 'text CHECK (value LIKE \'test%\')',
+                    'cubrid' => 'varchar CHECK (value LIKE \'test%\')',
                 ],
             ],
             [
@@ -770,15 +770,15 @@ abstract class QueryBuilderTest extends DatabaseTestCase
                 ],
             ],
             [
-                Schema::TYPE_TEXT . '(255) CHECK (value LIKE "test%")',
-                $this->text(255)->check('value LIKE "test%"'),
+                Schema::TYPE_TEXT . '(255) CHECK (value LIKE \'test%\')',
+                $this->text(255)->check('value LIKE \'test%\''),
                 [
-                    'mysql' => 'text CHECK (value LIKE "test%")',
-                    'sqlite' => 'text CHECK (value LIKE "test%")',
-                    'sqlsrv' => 'text CHECK (value LIKE "test%")',
-                    'cubrid' => 'varchar CHECK (value LIKE "test%")',
+                    'mysql' => 'text CHECK (value LIKE \'test%\')',
+                    'sqlite' => 'text CHECK (value LIKE \'test%\')',
+                    'sqlsrv' => 'text CHECK (value LIKE \'test%\')',
+                    'cubrid' => 'varchar CHECK (value LIKE \'test%\')',
                 ],
-                Schema::TYPE_TEXT . ' CHECK (value LIKE "test%")',
+                Schema::TYPE_TEXT . ' CHECK (value LIKE \'test%\')',
             ],
             [
                 Schema::TYPE_TEXT . '(255) CHECK (value LIKE \'test%\')',
@@ -957,7 +957,9 @@ abstract class QueryBuilderTest extends DatabaseTestCase
             if (!(strncmp($column, Schema::TYPE_PK, 2) === 0 ||
                   strncmp($column, Schema::TYPE_UPK, 3) === 0 ||
                   strncmp($column, Schema::TYPE_BIGPK, 5) === 0 ||
-                  strncmp($column, Schema::TYPE_UBIGPK, 6) === 0)) {
+                  strncmp($column, Schema::TYPE_UBIGPK, 6) === 0 ||
+                  strncmp($column, Schema::TYPE_TIMESTAMP, 9) === 0 ||
+                  strncmp($column, Schema::TYPE_TEXT, 4) === 0)) {
                 $columns['col' . ++$i] = str_replace('CHECK (value', 'CHECK ([[col' . $i . ']]', $column);
             }
         }
